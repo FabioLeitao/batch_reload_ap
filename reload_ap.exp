@@ -1,0 +1,30 @@
+#!/usr/bin/expect -f
+set SYSTEM [lindex $argv 0]
+set PASSWORD [lindex $argv 1]
+
+spawn ssh admin15@$SYSTEM
+
+set timeout 15
+expect {
+    timeout {
+        puts "Connection timed out"
+        exit 1
+    }
+
+    "yes/no" {
+        send "yes\r"
+        exp_continue
+    }
+
+    "assword:" {
+        send -- "$PASSWORD\r"
+    }
+}
+
+expect ">" { send "ena\r" }
+expect "assword:" { send -- "$PASSWORD\r" }
+expect "#" { send "reload\r" }
+expect "confirm" { send "\r" }
+expect "failed" { send "\r" }
+
+exit 0
