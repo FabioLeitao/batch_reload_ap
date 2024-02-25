@@ -4,7 +4,7 @@ ARGUMENTO=$1
 TIMESTAMP=`date +"%Y-%m-%d %T"`
 HOME_="/home/reload/reload"
 ZONA=${HOME_}/${ARGUMENTO}
-RELOAD="/usr/local/bin/reload_ap.exp"
+RELOAD="/usr/local/bin/reload_ap.expect"
 
 function ajuda_(){
 echo "Usage: $COMANDO [zona] [-h|--help]" >&2 ;
