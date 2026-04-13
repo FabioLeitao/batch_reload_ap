@@ -1,4 +1,11 @@
 
+1.0.2 / 2026-04-13
+==================
+
+  * Remove hardcoded password and internal DNS suffix; use AP_RELOAD_PASSWORD, AP_DNS_DOMAIN, AP_SSH_USER
+  * reload_ap.expect reads secrets from environment (not argv)
+  * README / CONTRIBUTING / SECURITY; .env.example; demo hostnames AP-DEMO-* in reload lists
+
 1.0.1 / 2024-02-25
 ==================
 

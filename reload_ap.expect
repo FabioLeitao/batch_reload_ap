@@ -1,8 +1,22 @@
 #!/usr/bin/expect -f
+# Reads AP_RELOAD_PASSWORD and optional AP_SSH_USER from the environment.
 set SYSTEM [lindex $argv 0]
-set PASSWORD [lindex $argv 1]
+if {$SYSTEM eq ""} {
+    puts stderr "usage: reload_ap.expect <hostname-or-shortname>"
+    exit 2
+}
+if {![info exists ::env(AP_RELOAD_PASSWORD)] || $::env(AP_RELOAD_PASSWORD) eq ""} {
+    puts stderr "AP_RELOAD_PASSWORD is not set"
+    exit 1
+}
+set PASSWORD $::env(AP_RELOAD_PASSWORD)
+if {[info exists ::env(AP_SSH_USER)] && $::env(AP_SSH_USER) ne ""} {
+    set ssh_user $::env(AP_SSH_USER)
+} else {
+    set ssh_user "admin"
+}
 
-spawn ssh admin15@$SYSTEM
+spawn ssh ${ssh_user}@${SYSTEM}
 
 set timeout 15
 expect {
